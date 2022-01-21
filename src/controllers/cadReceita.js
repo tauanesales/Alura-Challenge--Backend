@@ -27,7 +27,14 @@ router.get('/receitas', async(req, res) => {
     const {descricao, valor, data}= await Receita.create(req.body);
     return res.send({descricao, valor, data});
   });
-  
+
+router.put('/receitas/:id' , function(req,res){
+    const id = req.body.id;
+    res.status(200).send({
+        id: id
+    });
+});
+
 
 
 
