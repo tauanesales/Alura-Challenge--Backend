@@ -24,8 +24,8 @@ router.post('/register', async(req, res) => {
 });
 
 router.get('/receitas', async(req, res) => {
-    const receita = await Receita.create(req.body);
-    return res.send({receita});
+    const {descricao, valor, data}= await Receita.create(req.body);
+    return res.send({descricao, valor, data});
   });
   
 

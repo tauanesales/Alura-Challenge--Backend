@@ -25,8 +25,8 @@ router.post('/register', async(req, res) => {
 });
 
 router.get('/despesas', async(req, res) => {
-    const despesa = await Despesa.create(req.body);
-    return res.send({despesa});
+    const {descricao, valor, data} = await Despesa.create(req.body);
+    return res.send({descricao, valor, data});
   });
   
 
