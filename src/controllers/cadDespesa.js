@@ -6,16 +6,16 @@ const router = express.Router();
 
 router.post('/register', async(req, res) => {
 
-    const {descricao} = req.body
-    const mesmaDescricao = await Despesa.findOne({descricao});
-    const {data} = req.body
-    const mesmaData = await Despesa.findOne({ data });
-    const mesmoMes = data.toString().split('/')[0];
+    const {descricao, data} = req.body
+    const condicao = await Despesa.findOne({descricao, data});
+    //const {data} = req.body
+    //const mesmaData = await Despesa.findOne({ data });
+    //const mesmoMes = data.toString().split('/')[0];
 
 
     try {
-        if (mesmaDescricao && mesmaData){
-            return res.status(400).send({erro :'Conta já cadastrada'})
+        if (condicao){
+            return res.status(400).send({erro :'Anotação já cadastrada esse mês'})
         }
         const despesa = await Despesa.create(req.body);
         return res.send({despesa});
@@ -37,15 +37,11 @@ router.put('/despesas/:id' , function(req,res){
 });
   
 router.delete("/despesas/:id", (req, res) => {
-	//Apagar o registro no banco de dados MongoDB
     const artigo = Despesa.deleteOne({_id: req.body.id}, (err) => {
-		//Retornar erro quando não conseguir apagar no banco de dados
         if(err) return res.status(400).json({
             error: true,
             message: "Error: Artigo não foi apagado com sucesso!"
         });
-
-		//Retornar mensagem de sucesso quando excluir o registro com sucesso no banco de dados
         return res.json({
             error: false,
             message: "Artigo apagado com sucesso!"
