@@ -4,7 +4,7 @@ const Receita = require ('../models/receita.js');
 
 const router = express.Router();
 
-router.post('/register', async(req, res) => {
+router.post('/receita', async(req, res) => {
     
     const {descricao}  = req.body;
     const mesmaDescricao = await Receita.findOne({descricao});
