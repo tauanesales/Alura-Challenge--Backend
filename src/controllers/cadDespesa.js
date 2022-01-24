@@ -40,11 +40,11 @@ router.delete("/despesas/:id", (req, res) => {
     const artigo = Despesa.deleteOne({_id: req.body.id}, (err) => {
         if(err) return res.status(400).json({
             error: true,
-            message: "Error: Artigo não foi apagado com sucesso!"
+            message: "Error: essa despesa não foi apagada com sucesso!"
         });
         return res.json({
             error: false,
-            message: "Artigo apagado com sucesso!"
+            message: "Despesa apagada com sucesso!"
         });
     });
 });
